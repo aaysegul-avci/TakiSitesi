@@ -9,7 +9,7 @@ Proje kapsamında kullanıcıların ürünleri görüntüleyebileceği, ürün d
 # Proje Geliştiricileri
 
 Proje geliştirme sürecinde yer alan ekip üyeleri:
-	•	MavlyudaAlmazova – [MavlyudaAlmazova](https://github.com/MavlyudaAlmazova)
+	•	Mavlyuda Almazova – [MavlyudaAlmazova](https://github.com/MavlyudaAlmazova)
 	•	Ayşegül Avcı – [aaysegul-avci](https://github.com/aaysegul-avci)
 
 ---
