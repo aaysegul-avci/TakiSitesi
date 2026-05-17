@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLORIA | Odeme</title>
+    <link rel="stylesheet" href="styles.css?v=20260331-2">
+</head>
+<body class="checkout-page">
+    <div class="checkout-shell">
+        <div class="page-topbar">
+            <a href="index.html" class="page-brand">
+                <strong>FLORIA</strong>
+                <span>Secure Checkout</span>
+            </a>
+            <a href="sepetim.html" class="page-back">Sepete Don</a>
+        </div>
+
+        <div class="checkout-layout">
+            <section class="panel-card">
+                <div class="panel-header">
+                    <div>
+                        <h1>Odeme ve Teslimat</h1>
+                        <p class="panel-lead">Teslimat bilgilerinizi doldurun, siparis ozetinizi kontrol edin ve islemi tamamlayin.</p>
+                    </div>
+                    <div class="panel-badge">Guvenli Adim</div>
+                </div>
+
+                <form id="checkoutForm" class="checkout-form">
+                    <div class="form-section-card">
+                        <h2>Teslimat Bilgileri</h2>
+                        <p>Siparisinizin sorunsuz ulasmasi icin gerekli alanlari doldurun.</p>
+
+                        <div class="two-col">
+                            <div class="field">
+                                <label for="full-name">Ad Soyad</label>
+                                <input type="text" id="full-name" placeholder="Adinizi ve soyadinizi girin" required>
+                            </div>
+                            <div class="field">
+                                <label for="phone">Telefon</label>
+                                <input type="tel" id="phone" placeholder="05XX XXX XX XX" required>
+                            </div>
+                            <div class="field full-span">
+                                <label for="address">Teslimat Adresi</label>
+                                <textarea id="address" rows="4" placeholder="Mahalle, sokak, bina ve daire bilgileri" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section-card">
+                        <h2>Odeme Bilgileri</h2>
+                        <p>Bu alanlar demoda gorunur; gercek bir odeme altyapisi bagli degildir.</p>
+
+                        <div class="two-col">
+                            <div class="field full-span">
+                                <label for="card-name">Kart Uzerindeki Isim</label>
+                                <input type="text" id="card-name" placeholder="Kart sahibi adi" required>
+                            </div>
+                            <div class="field full-span">
+                                <label for="card-number">Kart Numarasi</label>
+                                <input type="text" id="card-number" placeholder="XXXX XXXX XXXX XXXX" required>
+                            </div>
+                            <div class="field">
+                                <label for="card-date">Son Kullanma</label>
+                                <input type="text" id="card-date" placeholder="AA/YY" required>
+                            </div>
+                            <div class="field">
+                                <label for="card-cvc">CVC</label>
+                                <input type="text" id="card-cvc" placeholder="CVC" required>
+                            </div>
+                        </div>
+
+                        <div class="helper-text">Siparis tamamlandiginda bilgileriniz veritabanina degil, bu demo proje icin sadece tarayici hafizasina kaydedilir.</div>
+                    </div>
+
+                    <button type="button" class="primary-btn" onclick="siparisTamamla()">Odemeyi Tamamla</button>
+                </form>
+                <div class="checkout-highlight">Bu alanda var olan siparis tamamlama mantigi korunur. Bilgileriniz demo akisi icin tarayici hafizasinda tutulur ve siparis kaydi olusturulur.</div>
+            </section>
+
+            <aside class="summary-card">
+                <h3>Siparis Ozeti</h3>
+                <div id="order-summary-list" class="summary-list"></div>
+                <div class="summary-total">
+                    <span>Genel Toplam</span>
+                    <strong id="final-total">₺0</strong>
+                </div>
+                <div class="summary-meta">
+                    <div class="summary-chip">Teslimat bilgileri eksikse islem tamamlanmaz</div>
+                    <div class="summary-chip">Siparis tamamlaninca sepet temizlenir</div>
+                </div>
+                <p class="summary-note">Kargo, vergi ve gercek odeme adimlari bu versiyonda simulasyon olarak dusunulmustur.</p>
+            </aside>
+        </div>
+    </div>
+
+    <script>
+        const sepet = JSON.parse(localStorage.getItem('floria_sepet')) || [];
+        const ozetAlani = document.getElementById('order-summary-list');
+        let toplam = 0;
+
+        if (sepet.length === 0) {
+            ozetAlani.innerHTML = '<div class="empty-state">Sepetiniz bos gorunuyor. Odeme oncesi urun ekleyin.</div>';
+        } else {
+            sepet.forEach((urun) => {
+                ozetAlani.innerHTML += `
+                    <div class="summary-row">
+                        <span>${urun.ad}</span>
+                        <strong>${urun.fiyat}</strong>
+                    </div>
+                `;
+                toplam += parseInt(urun.fiyat.replace(/[^0-9]/g, ''), 10) || 0;
+            });
+        }
+
+        document.getElementById('final-total').innerText = '₺' + toplam;
+
+        function siparisTamamla() {
+            const adSoyad = document.getElementById('full-name').value.trim();
+            const telefon = document.getElementById('phone').value.trim();
+            const adres = document.getElementById('address').value.trim();
+
+            if (!sepet.length) {
+                alert('Sepetiniz bos. Lutfen once urun ekleyin.');
+                return;
+            }
+
+            if (!adSoyad || !telefon || !adres) {
+                alert('Lutfen tum zorunlu alanlari doldurun.');
+                return;
+            }
+
+            let siparisler = JSON.parse(localStorage.getItem('floria_siparisler')) || [];
+
+            const yeniSiparis = {
+                musteri: adSoyad,
+                telefon: telefon,
+                adres: adres,
+                tutar: '₺' + toplam,
+                urunler: sepet,
+                tarih: new Date().toLocaleString('tr-TR')
+            };
+
+            siparisler.push(yeniSiparis);
+            localStorage.setItem('floria_siparisler', JSON.stringify(siparisler));
+
+            alert('Tesekkurler ' + adSoyad + '. Siparisiniz basariyla olusturuldu.');
+            localStorage.removeItem('floria_sepet');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FLORIA urun koleksiyonu">
+    <title>FLORIA | Urunler</title>
+    <link rel="stylesheet" href="styles.css?v=20260331-2">
+</head>
+<body class="catalog-page">
+    <div class="catalog-shell">
+        <div class="page-topbar">
+            <a href="index.html" class="page-brand">
+                <strong>FLORIA</strong>
+                <span>Signature Collection</span>
+            </a>
+            <div class="cart" onclick="window.location.href='sepetim.html'">Sepetim</div>
+        </div>
+
+        <section class="catalog-hero">
+            <h1>Zarif detaylarla olusan secili koleksiyon.</h1>
+            <p>Yuvarlak formlar, minimal parlakliklar ve gun boyu rahat kullanilabilecek takilar ile FLORIA seckisini tek sayfada kesfedin.</p>
+        </section>
+
+        <div class="catalog-layout">
+            <aside class="filter-card">
+                <h2>Filtrele</h2>
+                <p>Arama, kategori ve fiyat kirilimlariyla koleksiyonu daha hizli tarayin.</p>
+
+                <form id="filter-form">
+                    <div class="filter-group">
+                        <h3>Kategoriler</h3>
+                        <label class="filter-option"><input type="checkbox" name="category" value="yüzük"> Yuzukler</label>
+                        <label class="filter-option"><input type="checkbox" name="category" value="kolye"> Kolyeler</label>
+                        <label class="filter-option"><input type="checkbox" name="category" value="bileklik"> Bileklikler</label>
+                        <label class="filter-option"><input type="checkbox" name="category" value="küpe"> Kupeler</label>
+                    </div>
+
+                    <div class="filter-group">
+                        <h3>Fiyat Araligi</h3>
+                        <div class="price-grid">
+                            <div class="field">
+                                <label for="min-price">Minimum</label>
+                                <input type="number" id="min-price" name="min-price" placeholder="0">
+                            </div>
+                            <div class="field">
+                                <label for="max-price">Maksimum</label>
+                                <input type="number" id="max-price" name="max-price" placeholder="500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-actions">
+                        <button type="button" class="primary-btn" onclick="applyFilters()">Filtrele</button>
+                        <button type="button" class="secondary-btn" onclick="clearFilters()">Temizle</button>
+                    </div>
+                </form>
+            </aside>
+
+            <main class="catalog-main">
+                <section class="catalog-toolbar">
+                    <div>
+                        <h2>Urun Katalogu</h2>
+                        <p>Aradiginiz parcayi ada gore bulun veya filtrelerle secimi daraltin.</p>
+                    </div>
+                    <label class="search-shell" for="search-input">
+                        <img src="images/aramabut.png" alt="Ara">
+                        <input type="text" id="search-input" placeholder="Urun ara...">
+                    </label>
+                </section>
+
+                <section class="product-grid" id="product-grid">
+                    <article class="product-card" data-category="yüzük" data-price="150">
+                        <button class="product-share" type="button" onclick="copyLink(window.location.origin + window.location.pathname + '#kelebekli-yuzuk')">
+                            <img src="images/paylas.png" alt="Paylas">
+                        </button>
+                        <img class="product-image" src="images/kelebekli-yuzuk.jpg" alt="Kelebekli Yuzuk">
+                        <span class="product-meta">Yuzuk</span>
+                        <h3>Kelebekli Yuzuk</h3>
+                        <p>₺150</p>
+                        <div class="product-copy">Gunluk kullanimda zarif duran, ince formuyla dikkat ceken hafif bir tasarim.</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Sepete Ekle</button>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-category="kolye" data-price="250">
+                        <button class="product-share" type="button" onclick="copyLink(window.location.origin + window.location.pathname + '#uclu-kolye')">
+                            <img src="images/paylas.png" alt="Paylas">
+                        </button>
+                        <img class="product-image" src="images/uclu-kolye.jpg" alt="Uclu Kolye">
+                        <span class="product-meta">Kolye</span>
+                        <h3>Uclu Kolye</h3>
+                        <p>₺250</p>
+                        <div class="product-copy">Katmanli gorunumu sayesinde tek basina dahi tamamlanmis bir stil etkisi verir.</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Sepete Ekle</button>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-category="küpe" data-price="200">
+                        <button class="product-share" type="button" onclick="copyLink(window.location.origin + window.location.pathname + '#tasli-kupe')">
+                            <img src="images/paylas.png" alt="Paylas">
+                        </button>
+                        <img class="product-image" src="images/tasli-kupe.jpg" alt="Tasli Kupe">
+                        <span class="product-meta">Kupe</span>
+                        <h3>Tasli Kupe</h3>
+                        <p>₺200</p>
+                        <div class="product-copy">Iltili detaylariyla sade kombinleri bir anda daha ozenli gosteren bir secim.</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Sepete Ekle</button>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-category="yüzük" data-price="120">
+                        <button class="product-share" type="button" onclick="copyLink(window.location.origin + window.location.pathname + '#yildizli-yuzuk')">
+                            <img src="images/paylas.png" alt="Paylas">
+                        </button>
+                        <img class="product-image" src="images/yildizli-yuzuk.jpg" alt="Yildizli Yuzuk">
+                        <span class="product-meta">Yuzuk</span>
+                        <h3>Yildizli Yuzuk</h3>
+                        <p>₺120</p>
+                        <div class="product-copy">Parmakta ince bir isilti birakan, minimal ve genc bir yorum tasir.</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Sepete Ekle</button>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-category="yüzük" data-price="120">
+                        <button class="product-share" type="button" onclick="copyLink(window.location.origin + window.location.pathname + '#kalpli-yuzuk')">
+                            <img src="images/paylas.png" alt="Paylas">
+                        </button>
+                        <img class="product-image" src="images/kalpli-yuzuk.jpg" alt="Kalpli Yuzuk">
+                        <span class="product-meta">Yuzuk</span>
+                        <h3>Kalpli Yuzuk</h3>
+                        <p>₺120</p>
+                        <div class="product-copy">Romantik formu ile gunluk kullanim ve hediye secenekleri icin guzel bir parca.</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Sepete Ekle</button>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-category="küpe" data-price="350">
+                        <button class="product-share" type="button" onclick="copyLink(window.location.origin + window.location.pathname + '#yildizli-kupe')">
+                            <img src="images/paylas.png" alt="Paylas">
+                        </button>
+                        <img class="product-image" src="images/yildiz-kupe.jpg" alt="Yildizli Kupe">
+                        <span class="product-meta">Kupe</span>
+                        <h3>Yildizli Kupe</h3>
+                        <p>₺350</p>
+                        <div class="product-copy">Aksam stillerinde daha belirgin duran, parlayan ve iddiali bir modeldir.</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Sepete Ekle</button>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-category="küpe" data-price="250">
+                        <button class="product-share" type="button" onclick="copyLink(window.location.origin + window.location.pathname + '#cicekli-kupe')">
+                            <img src="images/paylas.png" alt="Paylas">
+                        </button>
+                        <img class="product-image" src="images/cicekli-kupe.jpg" alt="Cicekli Kupe">
+                        <span class="product-meta">Kupe</span>
+                        <h3>Cicekli Kupe</h3>
+                        <p>₺250</p>
+                        <div class="product-copy">Yumusak formu ve floral hissiyle daha romantik kombinleri tamamlar.</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Sepete Ekle</button>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-category="bileklik" data-price="250">
+                        <button class="product-share" type="button" onclick="copyLink(window.location.origin + window.location.pathname + '#kalpli-sahmeran')">
+                            <img src="images/paylas.png" alt="Paylas">
+                        </button>
+                        <img class="product-image" src="images/sahmeran.jpg" alt="Kalpli Sahmeran">
+                        <span class="product-meta">Bileklik</span>
+                        <h3>Kalpli Sahmeran</h3>
+                        <p>₺250</p>
+                        <div class="product-copy">Bilek ve parmak arasindaki ince baglantisiyla farkli ama zarif bir etki yaratir.</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Sepete Ekle</button>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-category="bileklik" data-price="150">
+                        <button class="product-share" type="button" onclick="copyLink(window.location.origin + window.location.pathname + '#yeni-yil-bileklik')">
+                            <img src="images/paylas.png" alt="Paylas">
+                        </button>
+                        <img class="product-image" src="images/yeni-yil-bileklik.jpg" alt="Yeni Yil Bileklik">
+                        <span class="product-meta">Bileklik</span>
+                        <h3>Yeni Yil Bileklik</h3>
+                        <p>₺150</p>
+                        <div class="product-copy">Canli gorunumu sayesinde gunluk stillere enerjik ve dikkat cekici bir dokunus ekler.</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Sepete Ekle</button>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-category="bileklik" data-price="350">
+                        <button class="product-share" type="button" onclick="copyLink(window.location.origin + window.location.pathname + '#ikili-bileklik')">
+                            <img src="images/paylas.png" alt="Paylas">
+                        </button>
+                        <img class="product-image" src="images/ikili-bileklik.jpg" alt="Ikili Bileklik">
+                        <span class="product-meta">Bileklik</span>
+                        <h3>Ikili Bileklik</h3>
+                        <p>₺350</p>
+                        <div class="product-copy">Katmanli hissi sevenler icin tek hamlede daha zengin gorunen bir form sunar.</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Sepete Ekle</button>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-category="bileklik" data-price="350">
+                        <button class="product-share" type="button" onclick="copyLink(window.location.origin + window.location.pathname + '#gumus-bileklik')">
+                            <img src="images/paylas.png" alt="Paylas">
+                        </button>
+                        <img class="product-image" src="images/gumus-bileklik.jpg" alt="Gumus Bileklik">
+                        <span class="product-meta">Bileklik</span>
+                        <h3>Gumus Bileklik</h3>
+                        <p>₺350</p>
+                        <div class="product-copy">Temiz ve klasik durusuyla uzun sure kullanilabilecek zamansiz bir secimdir.</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Sepete Ekle</button>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-category="yüzük" data-price="150">
+                        <button class="product-share" type="button" onclick="copyLink(window.location.origin + window.location.pathname + '#tasli-yuzuk')">
+                            <img src="images/paylas.png" alt="Paylas">
+                        </button>
+                        <img class="product-image" src="images/tasli-yuzuk.jpg" alt="Tasli Yuzuk">
+                        <span class="product-meta">Yuzuk</span>
+                        <h3>Tasli Yuzuk</h3>
+                        <p>₺150</p>
+                        <div class="product-copy">Zarif isiltisi sayesinde hem sade hem de daha ozenli kombinlerde rahatca kullanilir.</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Sepete Ekle</button>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-category="küpe" data-price="250">
+                        <button class="product-share" type="button" onclick="copyLink(window.location.origin + window.location.pathname + '#yuvarlak-kupe')">
+                            <img src="images/paylas.png" alt="Paylas">
+                        </button>
+                        <img class="product-image" src="images/yuvarlak-kupe.jpg" alt="Yuvarlak Kupe">
+                        <span class="product-meta">Kupe</span>
+                        <h3>Yuvarlak Kupe</h3>
+                        <p>₺250</p>
+                        <div class="product-copy">Dengeli ve sade formu ile her gun rahatca tercih edilebilecek pratik bir modeldir.</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Sepete Ekle</button>
+                        </div>
+                    </article>
+
+                    <article class="product-card" data-category="yüzük" data-price="150">
+                        <button class="product-share" type="button" onclick="copyLink(window.location.origin + window.location.pathname + '#klasik-yuzuk')">
+                            <img src="images/paylas.png" alt="Paylas">
+                        </button>
+                        <img class="product-image" src="images/yuzuk.jpg" alt="Klasik Yuzuk">
+                        <span class="product-meta">Yuzuk</span>
+                        <h3>Klasik Yuzuk</h3>
+                        <p>₺150</p>
+                        <div class="product-copy">Minimal dokusu sayesinde farkli takilarla kolayca kombinlenebilen sade bir tasarim.</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Sepete Ekle</button>
+                        </div>
+                    </article>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function urunleriFiltrele() {
+            const form = document.getElementById('filter-form');
+            const minPrice = parseInt(form['min-price'].value, 10) || 0;
+            const maxValue = parseInt(form['max-price'].value, 10);
+            const maxPrice = Number.isNaN(maxValue) ? Infinity : maxValue;
+            const categories = Array.from(form.querySelectorAll('input[name="category"]:checked')).map(function(input) {
+                return input.value;
+            });
+            const searchInput = document.getElementById('search-input').value.toLowerCase().trim();
+
+            document.querySelectorAll('.product-card').forEach(function(product) {
+                const price = parseInt(product.getAttribute('data-price'), 10);
+                const category = product.getAttribute('data-category');
+                const productName = product.querySelector('h3').textContent.toLowerCase();
+
+                const fiyatUygun = price >= minPrice && price <= maxPrice;
+                const kategoriUygun = categories.length === 0 || categories.includes(category);
+                const aramaUygun = !searchInput || productName.includes(searchInput);
+
+                product.style.display = fiyatUygun && kategoriUygun && aramaUygun ? '' : 'none';
+            });
+        }
+
+        function applyFilters() {
+            urunleriFiltrele();
+        }
+
+        function clearFilters() {
+            const form = document.getElementById('filter-form');
+            form.reset();
+            document.getElementById('search-input').value = '';
+            urunleriFiltrele();
+        }
+
+        function searchProducts() {
+            urunleriFiltrele();
+        }
+
+        function copyLink(link) {
+            navigator.clipboard.writeText(link).then(function() {
+                alert('Urun linki kopyalandi!');
+            }).catch(function(err) {
+                alert('Link kopyalanamadi: ' + err);
+            });
+        }
+
+        document.getElementById('search-input').addEventListener('input', searchProducts);
+
+        let sepet = JSON.parse(localStorage.getItem('floria_sepet')) || [];
+        document.querySelectorAll('.add-to-cart').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const urunKutusu = this.closest('.product-card');
+                const urun = {
+                    ad: urunKutusu.querySelector('h3').innerText,
+                    fiyat: urunKutusu.querySelector('p').innerText,
+                    resim: urunKutusu.querySelector('.product-image').src
+                };
+                sepet.push(urun);
+                localStorage.setItem('floria_sepet', JSON.stringify(sepet));
+                alert(urun.ad + ' basariyla sepete eklendi!');
+            });
+        });
+    </script>
+</body>
+</html>

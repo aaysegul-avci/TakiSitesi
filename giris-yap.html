@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FLORIA hesabiniza giris yapin">
+    <title>FLORIA | Giris Yap</title>
+    <link rel="stylesheet" href="styles.css?v=20260331-2">
+</head>
+<body class="auth-page">
+    <div class="auth-shell">
+        <section class="auth-showcase">
+            <div>
+                <div class="auth-brand">Floria Jewelry House</div>
+                <h1>Zarafetinize kaldiginiz yerden devam edin.</h1>
+                <p>Sepetiniz, favorileriniz ve siparis adimlariniz tek bir hesap altinda sizi bekliyor. Sade, guvenli ve premium bir alisveris deneyimi icin giris yapin.</p>
+            </div>
+            <div class="auth-badges">
+                <span>Guvenli alisveris</span>
+                <span>Hizli siparis</span>
+                <span>Ozel koleksiyonlar</span>
+            </div>
+        </section>
+
+        <section class="auth-panel">
+            <div class="auth-kicker">Uye Girisi</div>
+            <h2>Hesabiniza hos geldiniz</h2>
+            <p>Bilgilerinizi girin, sepetinize ve siparislerinize rahatca ulasin.</p>
+
+            <form class="auth-form" id="login-form">
+                <div class="field">
+                    <label for="email">E-posta</label>
+                    <input type="email" id="email" name="email" placeholder="ornek@floria.com" required>
+                </div>
+
+                <div class="field">
+                    <label for="password">Sifre</label>
+                    <input type="password" id="password" name="password" placeholder="Sifrenizi girin" required>
+                </div>
+
+                <button type="submit" class="primary-btn">Giris Yap</button>
+                <a href="index.html" class="secondary-btn">Ana Sayfaya Don</a>
+            </form>
+
+            <div class="auth-links">
+                <a href="sifremi-unuttum.html">Sifremi Unuttum</a>
+                <span>Hesabiniz yok mu?</span>
+                <a href="kayit-ol.html">Kayit Ol</a>
+            </div>
+        </section>
+    </div>
+</body>
+<script>
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const email = document.getElementById('email').value.trim().toLowerCase();
+        const password = document.getElementById('password').value;
+        const kullanicilar = JSON.parse(localStorage.getItem('floria_users')) || [];
+
+        const kullanici = kullanicilar.find(function(item) {
+            return item.email === email && item.password === password;
+        });
+
+        if (!kullanici) {
+            alert('E-posta veya sifre hatali. Once kayit olmayi deneyin.');
+            return;
+        }
+
+        localStorage.setItem('floria_active_user', JSON.stringify({
+            name: kullanici.name,
+            email: kullanici.email
+        }));
+
+        alert('Hos geldiniz, ' + kullanici.name + '. Giris basarili.');
+        window.location.href = 'index.html';
+    });
+</script>
+</html>

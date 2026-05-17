@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FLORIA uyelik olusturma sayfasi">
+    <title>FLORIA | Kayit Ol</title>
+    <link rel="stylesheet" href="styles.css?v=20260331-2">
+</head>
+<body class="auth-page">
+    <div class="auth-shell">
+        <section class="auth-showcase">
+            <div>
+                <div class="auth-brand">Floria Membership</div>
+                <h1>Floria dunyasina zarif bir adim atin.</h1>
+                <p>Uyelik olusturarak yeni koleksiyonlari daha rahat takip edin, sepetinizi kaydedin ve siparis deneyiminizi daha akici hale getirin.</p>
+            </div>
+            <div class="auth-badges">
+                <span>Premium deneyim</span>
+                <span>Tek tikta takip</span>
+                <span>Yeni urun haberi</span>
+            </div>
+        </section>
+
+        <section class="auth-panel">
+            <div class="auth-kicker">Yeni Uye</div>
+            <h2>Floria hesabinizi olusturun</h2>
+            <p>Bir kac adimda kaydolun ve alisveris deneyiminizi daha duzenli hale getirin.</p>
+
+            <form class="auth-form" id="register-form">
+                <div class="auth-form-grid">
+                    <div class="field">
+                        <label for="name">Ad Soyad</label>
+                        <input type="text" id="name" name="name" placeholder="Adinizi ve soyadinizi girin" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="email">E-posta</label>
+                        <input type="email" id="email" name="email" placeholder="ornek@floria.com" required>
+                    </div>
+                </div>
+
+                <div class="auth-form-grid">
+                    <div class="field">
+                        <label for="password">Sifre</label>
+                        <input type="password" id="password" name="password" placeholder="En az 8 karakter" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="confirm-password">Sifre Tekrar</label>
+                        <input type="password" id="confirm-password" name="confirm_password" placeholder="Sifrenizi tekrar girin" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="primary-btn">Kayit Ol</button>
+                <a href="index.html" class="secondary-btn">Ana Sayfaya Don</a>
+            </form>
+
+            <div class="auth-links">
+                <span>Zaten hesabiniz var mi?</span>
+                <a href="giris-yap.html">Giris Yap</a>
+            </div>
+        </section>
+    </div>
+</body>
+<script>
+    document.getElementById('register-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim().toLowerCase();
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+        const kullanicilar = JSON.parse(localStorage.getItem('floria_users')) || [];
+
+        if (password !== confirmPassword) {
+            alert('Sifreler birbiriyle ayni degil.');
+            return;
+        }
+
+        if (password.length < 6) {
+            alert('Sifre en az 6 karakter olmali.');
+            return;
+        }
+
+        const mevcut = kullanicilar.find(function(item) {
+            return item.email === email;
+        });
+
+        if (mevcut) {
+            alert('Bu e-posta ile zaten bir hesap olusturulmus.');
+            return;
+        }
+
+        const yeniKullanici = {
+            name: name,
+            email: email,
+            password: password,
+            createdAt: new Date().toLocaleString('tr-TR')
+        };
+
+        kullanicilar.push(yeniKullanici);
+        localStorage.setItem('floria_users', JSON.stringify(kullanicilar));
+        localStorage.setItem('floria_active_user', JSON.stringify({
+            name: name,
+            email: email
+        }));
+
+        alert('Kayit basarili. Hos geldiniz, ' + name + '.');
+        window.location.href = 'index.html';
+    });
+</script>
+</html>

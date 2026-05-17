@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLORIA | Sepetim</title>
+    <link rel="stylesheet" href="styles.css?v=20260331-4">
+</head>
+<body class="cart-page">
+    <div class="cart-shell">
+        <div class="page-topbar">
+            <a href="index.html" class="page-brand">
+                <strong>FLORIA</strong>
+                <span>Jewelry House</span>
+            </a>
+            <a href="urunler.html" class="page-back">Koleksiyona Don</a>
+        </div>
+
+        <section class="cart-hero">
+            <div>
+                <h1>Sectiginiz parcalar artik son dokunus icin hazir.</h1>
+                <p>Sepetinizdeki urunleri gozden gecirin, toplam tutari kontrol edin ve dilediginiz zaman odeme adimina gecin. Buradaki tum akista mevcut sepet mantigi korunur.</p>
+            </div>
+            <div class="cart-hero-stats">
+                <div class="cart-stat">
+                    <strong>Floria Notu</strong>
+                    <span>Zarif, sade ve hediye edilmeye uygun urunleri tek ekranda gormeniz icin duzenlendi.</span>
+                </div>
+                <div class="cart-stat">
+                    <strong>Sepet Durumu</strong>
+                    <span>Urun ekleme, silme ve toplam hesaplama islemleri anlik olarak guncellenir.</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="cart-layout">
+            <section class="panel-card">
+                <div class="panel-header">
+                    <div>
+                        <h1>Alisveris Sepetim</h1>
+                        <p class="panel-lead">Sectiginiz parcalari burada goruntuleyebilir, toplam tutari inceleyebilir ve odeme adimina gecis yapabilirsiniz.</p>
+                    </div>
+                    <div class="panel-badge">Hazir Siparis</div>
+                </div>
+                <div id="cart-items" class="cart-items"></div>
+                <div class="cart-note">Sepetinize eklediginiz urunler bu tarayicida saklanir. Isterseniz urunleri kaldirabilir, isterseniz dogrudan odeme adimina gecebilirsiniz.</div>
+            </section>
+
+            <aside class="summary-card">
+                <h3>Siparis Ozeti</h3>
+                <div class="summary-list" id="cart-summary-list"></div>
+                <div class="summary-total">
+                    <span>Toplam</span>
+                    <strong id="total-price">₺0</strong>
+                </div>
+                <button class="primary-btn summary-action" onclick="odemeSayfasi()">Odemeye Gec</button>
+                <div class="summary-meta">
+                    <div class="summary-chip">Secilen urunler aninda guncellenir</div>
+                    <div class="summary-chip">Sepet tutari otomatik hesaplanir</div>
+                </div>
+                <p class="summary-note">Tum adimlar tarayicinizda korunur. Bu proje su an prototip mantiginda calisir ve odeme entegrasyonu icermez.</p>
+            </aside>
+        </div>
+    </div>
+
+    <script>
+        let sepet = JSON.parse(localStorage.getItem('floria_sepet')) || [];
+        const sepetListesi = document.getElementById('cart-items');
+        const ozetListesi = document.getElementById('cart-summary-list');
+        const toplamGosterge = document.getElementById('total-price');
+
+        function sepetiGoster() {
+            if (sepet.length === 0) {
+                sepetListesi.innerHTML = '<div class="empty-state">Sepetiniz su an bos. Begendiginiz urunleri ekleyerek devam edebilirsiniz.</div>';
+                ozetListesi.innerHTML = '';
+                toplamGosterge.innerText = '₺0';
+                return;
+            }
+
+            sepetListesi.innerHTML = '';
+            ozetListesi.innerHTML = '';
+            let toplamHesap = 0;
+
+            sepet.forEach((urun, index) => {
+                const fiyatRakam = parseInt(urun.fiyat.replace(/[^0-9]/g, ''), 10) || 0;
+                toplamHesap += fiyatRakam;
+
+                sepetListesi.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${urun.resim}" alt="${urun.ad}">
+                        <div class="cart-info">
+                            <h3>${urun.ad}</h3>
+                            <p class="price">${urun.fiyat}</p>
+                            <div class="cart-caption">Secili FLORIA parcasi sepetinize eklendi ve odeme adiminda korunacak.</div>
+                        </div>
+                        <button class="remove-btn" onclick="urunuSil(${index})">Kaldir</button>
+                    </div>
+                `;
+
+                ozetListesi.innerHTML += `
+                    <div class="summary-row">
+                        <span>${urun.ad}</span>
+                        <strong>${urun.fiyat}</strong>
+                    </div>
+                `;
+            });
+
+            toplamGosterge.innerText = '₺' + toplamHesap;
+        }
+
+        function urunuSil(index) {
+            sepet.splice(index, 1);
+            localStorage.setItem('floria_sepet', JSON.stringify(sepet));
+            sepetiGoster();
+        }
+
+        function odemeSayfasi() {
+            if (sepet.length > 0) {
+                window.location.href = 'odeme.html';
+            } else {
+                alert('Sepetiniz bos. Lutfen once urun ekleyin.');
+            }
+        }
+
+        sepetiGoster();
+    </script>
+</body>
+</html>

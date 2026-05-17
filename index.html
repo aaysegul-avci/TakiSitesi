@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Floria Takı E-Ticaret Sitesi">
+
+    <title>FLORIA</title>
+
+    <link rel="stylesheet" href="styles.css?v=20260331-2">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+<header id="header">
+
+    <div class="header-left" style="width:150px;">
+    </div>
+
+    <div class="logo">
+        <h1>FLORIA</h1>
+    </div>
+
+    <div class="header-right"
+         style="display:flex; align-items:center; gap:15px; width:150px; justify-content:flex-end;">
+
+        <div class="cart" onclick="window.location.href='sepetim.html'">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Sepetim</span>
+        </div>
+
+        <div class="menu-toggle" onclick="toggleMenu(event)">
+            ☰
+        </div>
+
+    </div>
+
+</header>
+
+<nav id="sidebar" onclick="event.stopPropagation()">
+
+    <ul>
+        <li><a href="#home">Ana Sayfa</a></li>
+        <li><a href="#about">Hakkımızda</a></li>
+        <li><a href="#contact">İletişim</a></li>
+    </ul>
+
+    <div class="auth-buttons">
+
+        <button onclick="window.location.href='kayit-ol.html'">
+            Kayıt Ol
+        </button>
+
+        <button onclick="window.location.href='giris-yap.html'">
+            Giriş Yap
+        </button>
+
+    </div>
+
+</nav>
+
+<section id="home">
+
+    <div class="banner">
+
+        <h2>FLORIA SEÇKİSİ</h2>
+
+        <p>Işıltınızı Tamamlayan Zarif Dokunuşlar</p>
+
+        <a href="urunler.html" class="btn-hero">
+            KOLEKSİYONU KEŞFET
+        </a>
+
+    </div>
+
+</section>
+
+<section id="products">
+
+    <h2>Popüler Ürünler</h2>
+
+    <div class="product-list">
+
+        <div class="product-item">
+
+            <img src="images/kelebekli-yuzuk.jpg"
+                 alt="Kelebekli yüzük">
+
+            <h3>Kelebekli Yüzük</h3>
+
+            <p>₺150</p>
+
+            <button class="add-to-cart">
+                Sepete Ekle
+            </button>
+
+            <div class="share"
+                 onclick="shareProduct('Kelebekli Yüzük')">
+
+                <i class="fas fa-share-alt"></i>
+                Paylaş
+
+            </div>
+
+        </div>
+
+        <div class="product-item">
+
+            <img src="images/uclu-kolye.jpg"
+                 alt="Üçlü Kolye">
+
+            <h3>Üçlü Kolye</h3>
+
+            <p>₺350</p>
+
+            <button class="add-to-cart">
+                Sepete Ekle
+            </button>
+
+            <div class="share"
+                 onclick="shareProduct('Üçlü Kolye')">
+
+                <i class="fas fa-share-alt"></i>
+                Paylaş
+
+            </div>
+
+        </div>
+
+        <div class="product-item">
+
+            <img src="images/tasli-kupe.jpg"
+                 alt="Taşlı Küpe">
+
+            <h3>Taşlı Küpe</h3>
+
+            <p>₺250</p>
+
+            <button class="add-to-cart">
+                Sepete Ekle
+            </button>
+
+            <div class="share"
+                 onclick="shareProduct('Taşlı Küpe')">
+
+                <i class="fas fa-share-alt"></i>
+                Paylaş
+
+            </div>
+
+        </div>
+
+        <div class="product-item">
+
+            <img src="images/yeni-yil-bileklik.jpg"
+                 alt="Yeni Yıl Bilekliği">
+
+            <h3>Yeni Yıl Bilekliği</h3>
+
+            <p>₺150</p>
+
+            <button class="add-to-cart">
+                Sepete Ekle
+            </button>
+
+            <div class="share"
+                 onclick="shareProduct('Yeni Yıl Bilekliği')">
+
+                <i class="fas fa-share-alt"></i>
+                Paylaş
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="about">
+
+    <h2>Zarafetin Hikayesi</h2>
+
+    <p>
+        Floria Takı olarak, her detayın bir ruhu olduğuna inanıyoruz.
+        Modern çizgileri geleneksel zarafetle buluşturduğumuz
+        koleksiyonlarımızda, kendinizi her an özel hissetmeniz için çalışıyoruz.
+    </p>
+
+</section>
+
+<section id="contact">
+
+    <h2>Bize Yazın</h2>
+
+    <form onsubmit="mesajGonder(event)">
+
+        <input type="text"
+               name="name"
+               placeholder="İsim"
+               required>
+
+        <input type="email"
+               name="email"
+               placeholder="E-posta"
+               required>
+
+        <textarea name="message"
+                  placeholder="Mesajınız..."
+                  rows="3"
+                  required></textarea>
+
+        <button type="submit">
+            Gönder
+        </button>
+
+    </form>
+
+</section>
+
+<footer>
+
+    <p>
+        &copy; 2025 FLORIA TAKI SİTESİ.
+        Tüm hakları saklıdır.
+    </p>
+
+</footer>
+
+<script>
+
+    function mesajGonder(event) {
+
+        event.preventDefault();
+
+        alert("Mesajınız başarıyla gönderildi!");
+
+    }
+
+    let sepet =
+        JSON.parse(localStorage.getItem('floria_sepet')) || [];
+
+    document.querySelectorAll('.add-to-cart')
+        .forEach(button => {
+
+        button.addEventListener('click', function () {
+
+            const urunKutusu = this.parentElement;
+
+            const urun = {
+
+                ad:
+                    urunKutusu.querySelector('h3').innerText,
+
+                fiyat:
+                    urunKutusu.querySelector('p').innerText,
+
+                resim:
+                    urunKutusu.querySelector('img').src
+
+            };
+
+            sepet.push(urun);
+
+            localStorage.setItem(
+                'floria_sepet',
+                JSON.stringify(sepet)
+            );
+
+            alert(urun.ad + ' başarıyla sepete eklendi!');
+
+        });
+
+    });
+
+    function toggleMenu(event) {
+
+        event.stopPropagation();
+
+        document
+            .getElementById('sidebar')
+            .classList.toggle('active');
+
+    }
+
+    document.body.addEventListener('click', function () {
+
+        document
+            .getElementById('sidebar')
+            .classList.remove('active');
+
+    });
+
+    function shareProduct(productName) {
+
+        navigator.clipboard
+            .writeText(window.location.href)
+            .then(() => {
+
+            alert(
+                productName +
+                ' paylaşım bağlantısı kopyalandı!'
+            );
+
+        });
+
+    }
+
+</script>
+
+</body>
+</html>

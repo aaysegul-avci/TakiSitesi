@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <title>FLORIA Web Programlama 2 Proje Raporu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #2f2730;
+            line-height: 1.45;
+        }
+        h1, h2, h3 {
+            color: #4d2f3d;
+        }
+        h1 {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 8px;
+        }
+        h2 {
+            font-size: 20px;
+            border-bottom: 1px solid #d8cbd2;
+            padding-bottom: 4px;
+            margin-top: 26px;
+        }
+        h3 {
+            font-size: 16px;
+            margin-top: 18px;
+        }
+        p, li {
+            font-size: 11.5pt;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 12px 0;
+        }
+        th, td {
+            border: 1px solid #cdbdc5;
+            padding: 7px;
+            vertical-align: top;
+            font-size: 10.5pt;
+        }
+        th {
+            background: #f3edf0;
+            color: #4d2f3d;
+        }
+        .meta {
+            text-align: center;
+            color: #6f5d67;
+            margin-bottom: 22px;
+        }
+        .shot {
+            width: 100%;
+            max-width: 680px;
+            border: 1px solid #d8cbd2;
+            margin: 8px 0 18px;
+        }
+        .caption {
+            font-weight: bold;
+            color: #4d2f3d;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>FLORIA Web Programlama 2 Proje Raporu</h1>
+    <p class="meta">Takı e-ticaret sitesi ve yönetim paneli</p>
+
+    <h2>1. Proje Özeti</h2>
+    <p>
+        FLORIA projesi, PHP, MySQL ve PDO kullanılarak geliştirilen dinamik bir takı e-ticaret sitesidir.
+        Projede kullanıcı arayüzü, üyelik sistemi, ürün listeleme, sepet, sipariş, admin paneli, rol-yetki sistemi,
+        slider yönetimi, menü yönetimi, ayarlar yönetimi, raporlama ve loglama modülleri bulunmaktadır.
+    </p>
+
+    <h2>2. Kullanılan Teknolojiler</h2>
+    <ul>
+        <li>PHP 8 ve PDO</li>
+        <li>MySQL / MariaDB</li>
+        <li>HTML5, CSS3 ve JavaScript</li>
+        <li>Responsive tasarım</li>
+        <li>CSV ve PDF dışa aktarma</li>
+        <li>Dosya ve veritabanı tabanlı loglama</li>
+    </ul>
+
+    <h2>3. Hocanın İstediği Maddelerin Karşılanması</h2>
+    <table>
+        <tr>
+            <th>Madde</th>
+            <th>Projede Karşılığı</th>
+            <th>İlgili Dosyalar</th>
+        </tr>
+        <tr>
+            <td>Responsive kullanıcı arayüzü ve admin paneli</td>
+            <td>Public site ve admin paneli mobil, tablet ve masaüstü ekranlara uyumlu olarak tasarlandı.</td>
+            <td>styles.css, public/*, admin/*</td>
+        </tr>
+        <tr>
+            <td>Normalize veritabanı ve foreign key ilişkileri</td>
+            <td>Roller, yetkiler, kullanıcılar, ürünler, kategoriler, siparişler, menüler, sliderlar, ayarlar ve loglar ayrı tablolarla kuruldu.</td>
+            <td>sql/floria_schema.sql</td>
+        </tr>
+        <tr>
+            <td>Prepared Statements</td>
+            <td>Veritabanı sorguları PDO prepared statements ile yazıldı.</td>
+            <td>app/repositories/*, app/config/database.php</td>
+        </tr>
+        <tr>
+            <td>Türkçe karakter desteği</td>
+            <td>Veritabanında utf8mb4, HTML tarafında UTF-8 ve çıktı güvenliği için htmlspecialchars kullanıldı.</td>
+            <td>sql/floria_schema.sql, app/views/layouts/*, app/helpers/functions.php</td>
+        </tr>
+        <tr>
+            <td>Şifre hashleme</td>
+            <td>Şifreler açık metin saklanmaz; password_hash ve password_verify kullanılır.</td>
+            <td>public/register.php, public/login.php, admin/login.php, admin/setup.php</td>
+        </tr>
+        <tr>
+            <td>Modüler mimari</td>
+            <td>Config, helper, repository, layout ve component dosyaları ayrıldı.</td>
+            <td>app/config, app/helpers, app/repositories, app/views</td>
+        </tr>
+        <tr>
+            <td>Rol ve yetki sistemi</td>
+            <td>Super Admin, Editor, Moderator ve Customer rolleri veritabanı kontrollü permission sistemiyle yönetilir.</td>
+            <td>roles, permissions, role_permissions tabloları, app/helpers/auth.php</td>
+        </tr>
+        <tr>
+            <td>Admin profil güncelleme</td>
+            <td>Admin kullanıcı kendi ad, e-posta, telefon ve şifre bilgisini güncelleyebilir.</td>
+            <td>admin/profile.php</td>
+        </tr>
+        <tr>
+            <td>Oturum ve yetki kontrolü</td>
+            <td>Admin sayfalarında giriş ve permission kontrolü yapılır.</td>
+            <td>app/helpers/auth.php, admin/*</td>
+        </tr>
+        <tr>
+            <td>Veritabanından gelen içerik</td>
+            <td>Ürünler, kategoriler, slider, menü ve site ayarları veritabanından çekilir.</td>
+            <td>public/index.php, public/products.php, app/repositories/*</td>
+        </tr>
+        <tr>
+            <td>Dinamik slider</td>
+            <td>Slider görseli, başlığı, açıklaması, linki ve sırası admin panelden yönetilir.</td>
+            <td>admin/sliders.php, app/repositories/SliderRepository.php</td>
+        </tr>
+        <tr>
+            <td>Dinamik menü</td>
+            <td>Menü başlıkları, linkleri ve sıralaması admin panelden yönetilir.</td>
+            <td>admin/menus.php, app/repositories/MenuRepository.php</td>
+        </tr>
+        <tr>
+            <td>Merkezi ayarlar</td>
+            <td>Site başlığı, slogan, iletişim ve sosyal medya bilgileri ayarlar ekranından güncellenir.</td>
+            <td>admin/settings.php, app/repositories/SettingRepository.php</td>
+        </tr>
+        <tr>
+            <td>Dashboard widgetları</td>
+            <td>Toplam kullanıcı, ürün, sipariş, slider ve log sayıları dashboard üzerinde gösterilir.</td>
+            <td>admin/index.php, app/repositories/DashboardRepository.php</td>
+        </tr>
+        <tr>
+            <td>Filtreleme ve sıralama</td>
+            <td>Ürün listeleme ekranlarında arama, kategori, durum ve sıralama seçenekleri bulunur.</td>
+            <td>public/products.php, admin/products.php</td>
+        </tr>
+        <tr>
+            <td>Çoklu seçim ve toplu silme</td>
+            <td>Ürün, menü ve slider kayıtlarında çoklu seçim ile toplu silme yapılabilir.</td>
+            <td>admin/products.php, admin/menus.php, admin/sliders.php</td>
+        </tr>
+        <tr>
+            <td>PDF / CSV dışa aktarma</td>
+            <td>Ürün, kullanıcı ve sipariş verileri CSV ve PDF formatlarında dışa aktarılabilir.</td>
+            <td>admin/export_*.php, app/helpers/pdf.php</td>
+        </tr>
+        <tr>
+            <td>Loglama</td>
+            <td>Veritabanı hataları, yetkisiz erişimler ve kritik sistem hataları dosyaya ve uygun durumda logs tablosuna kaydedilir.</td>
+            <td>app/helpers/logger.php, storage/logs/system.log, logs tablosu</td>
+        </tr>
+        <tr>
+            <td>Kullanıcı dostu mesajlar</td>
+            <td>Kayıt, giriş, silme, sipariş ve hata durumlarında anlaşılır uyarı mesajları gösterilir.</td>
+            <td>app/helpers/functions.php, public/*, admin/*</td>
+        </tr>
+    </table>
+
+    <h2>4. Site Ekran Görüntüleri</h2>
+
+    <p class="caption">Ana Sayfa</p>
+    <img class="shot" src="screenshots/01-public-home.png" alt="Ana sayfa">
+
+    <p class="caption">Ürün Listeleme ve Filtreleme</p>
+    <img class="shot" src="screenshots/02-public-products.png" alt="Ürün listeleme">
+
+    <p class="caption">Ürün Detay Sayfası</p>
+    <img class="shot" src="screenshots/03-public-product-detail.png" alt="Ürün detay">
+
+    <p class="caption">Kullanıcı Giriş Sayfası</p>
+    <img class="shot" src="screenshots/04-public-login.png" alt="Kullanıcı giriş">
+
+    <p class="caption">Kullanıcı Kayıt Sayfası</p>
+    <img class="shot" src="screenshots/05-public-register.png" alt="Kullanıcı kayıt">
+
+    <p class="caption">Sepet Sayfası</p>
+    <img class="shot" src="screenshots/06-public-cart.png" alt="Sepet">
+
+    <h2>5. Admin Panel Ekran Görüntüleri</h2>
+
+    <p class="caption">Admin Giriş Sayfası</p>
+    <img class="shot" src="screenshots/07-admin-login.png" alt="Admin giriş">
+
+    <p class="caption">Admin Dashboard</p>
+    <img class="shot" src="screenshots/08-admin-dashboard.png" alt="Admin dashboard">
+
+    <p class="caption">Ürün Yönetimi</p>
+    <img class="shot" src="screenshots/09-admin-products.png" alt="Admin ürün yönetimi">
+
+    <p class="caption">Slider Yönetimi</p>
+    <img class="shot" src="screenshots/10-admin-sliders.png" alt="Admin slider yönetimi">
+
+    <p class="caption">Merkezi Ayarlar</p>
+    <img class="shot" src="screenshots/11-admin-settings.png" alt="Admin ayarlar">
+
+    <h2>6. Sonuç</h2>
+    <p>
+        FLORIA projesi, Web Programlama 2 proje kriterlerinde istenen kullanıcı arayüzü, admin paneli,
+        veritabanı ilişkileri, güvenli sorgu yapısı, şifre hashleme, rol-yetki kontrolü, dinamik içerik yönetimi,
+        raporlama, loglama ve kullanıcı bilgilendirme özelliklerini içerecek şekilde tamamlanmıştır.
+    </p>
+</body>
+</html>
